@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Roboto+Condensed:wght@700&display=swap");
+body {
+  background: url(./img/photo-1552566626-52f8b828add9.jpg);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Arial;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  padding: 5px;
+  background: #003049;
+  margin: auto;
+}
+
+header h1 {
+  margin: 0;
+  font-family: 'Architects Daughter', cursive;
+  font-size: 1.80em;
+  color: white;
+  padding: 5px 0px 5px 0px;
+}
+
+header h1 span img {
+  max-height: 35px;
+  margin: 0 7px -9px 0;
+}
+
+form {
+  position: relative;
+  background: #dadada;
+  max-width: 360px;
+  margin: 100px auto;
+  padding: 30px 45px;
+  text-align: center;
+}
+
+form h2 {
+  font-weight: 400;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-top: 0;
+}
+
+form input {
+  outline: 0;
+  background: #eeeeee;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 14px;
+}
+
+form button {
+  width: 80px;
+  height: 30px;
+  border: 0.1px solid #007ad8;
+  color: #1976D2;
+  cursor: pointer;
+  background: none;
+  border-radius: 5px;
+}
+
+form button:hover {
+  color: white;
+  background: #007ad8;
+}
+
+form p {
+  margin: 15px 0 0;
+  color: #222831;
+  font-size: 14px;
+}
+
+div {
+  margin-top: -10%;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+div button {
+  width: 80px;
+  height: 30px;
+  border: 0.1px solid #007ad8;
+  color: #1976D2;
+  cursor: pointer;
+  background: none;
+  border-radius: 5px;
+}
+
+div button:hover {
+  color: white;
+  background: #007ad8;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+footer p {
+  font-weight: 300;
+  font-size: 0.8em;
+}
+/*# sourceMappingURL=style.css.map */
