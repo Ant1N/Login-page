@@ -1,63 +1,88 @@
-if (localStorage.getItem("loginDetails") === null){
-	const objPeople = [
-		{
-		  username: "isak",
-		  password: "antin",
-		},
-		{
-		  username: "janne",
-		  password: "test",
-		},
-	  ];
-	  const obj = JSON.parse(localStorage.getItem("loginDetails"));
-	  localStorage.setItem("loginDetails", JSON.stringify(objPeople));
+
+if (localStorage.getItem("loginDetails") === null) {
+  const objPeople = [
+    {
+      username: "isak",
+      password: "antin",
+    },
+    {
+      username: "janne",
+      password: "test",
+    }
+  ];
+  localStorage.setItem("loginDetails", JSON.stringify(objPeople));
 }
 
-function login() {
-  	const username = document.getElementById("username").value;	//get username value
-  	const password = document.getElementById("password").value;	//get password value
-  	document.getElementById("verification").innerHTML = "";		//clear <p> tag of previous log in attempts
-	const obj = JSON.parse(localStorage.getItem("loginDetails"));
+const verification = document.getElementById('verification');
+const inlogged = document.getElementById('div1');
+const loginForm = document.getElementById('login-form');
 
-  for (let i = 0; i < obj.length; i++) {	//for loop that checks objPeople array
-    if (username == obj[i].username && password == obj[i].password) {	//checking if username and password input match array
-      document.getElementById("login-form").style.visibility = "hidden";	//if true, hide login forms
+class Session{
+  constructor(){
+      this.login = (localStorage.getItem('loggedIn') == 'true'); 
+      this.user = localStorage.getItem('username');
+  }
+  setUser = () => {
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+      let users = JSON.parse(localStorage.getItem("loginDetails"))
+      let added = true;
+      for(let i = 0; i < users.length;i++){
+          if(username == users[i].username){
+            added = false;
+          }
+      }
+      if(added == true){
+        users.push({
+          username:username,
+          password:password
+        })
+      }else{
+        verification.innerHTML = 'The user already exists';
+      }
+      localStorage.setItem("loginDetails", JSON.stringify(users));
+  }
+  setLogin = () => {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        let users = JSON.parse(localStorage.getItem("loginDetails"))
+        for(let i = 0; i < users.length;i++){
+            if(username == users[i].username){
+              this.user = username
+                if(password == users[i].password){
+                    this.login = true;
+                    this.user = username;
+                }else{
+                    verification.innerText = 'You got the wrong password.'
+                }   
+            }
+        }
+        if(this.user == null || this.user == undefined || this.user == false){
+          verification.innerText = 'You got the wrong username.'
+        }
 
-      const welcomeH1 = document.createElement("h1");	//create H1 element that welcomes user
-      const welcomeText = document.createTextNode(`Welcome inside ${username}, have a great stay`);	//H1 welcome message
-      welcomeH1.appendChild(welcomeText);	//append text to H1 tag
-      const welcomeDiv = document.getElementById("div1");	//get div where H! will be displayed
-	  welcomeDiv.appendChild(welcomeH1);	//append H1 tag to div
-	  
-      const logoutBtn = document.createElement("BUTTON"); // Create a <button> element
-      logoutBtn.innerHTML = "Log out"; // Insert text
-	  document.body.appendChild(logoutBtn); //append text to button 
-	  welcomeDiv.appendChild(logoutBtn)	//append logout button
-	  logoutBtn.onclick = function logout(){ //add logout button function
-		window.location.reload();	//reload the site to log out
-	  };
-	  
-      // stop the function if this is found to be true
-	  return;
+        if(this.login == true){
+          localStorage.setItem('loggedIn', this.login)
+          localStorage.setItem('username', this.user)
+          this.show()
+        }
+    }
+    show = () => {
+      inlogged.innerHTML = ""; 
+      inlogged.innerHTML += "<h2>Welcome to Slappin' Burgers, " + this.user + "</h2>"
+      inlogged.innerHTML += "<button onclick='session.logOut()'>Log out</button>"
+      loginForm.style.visibility = "hidden";
+    }
+    logOut = () => {
+      localStorage.removeItem('username');
+      localStorage.setItem('loggedIn', false);
+      window.location.reload();
     }
   }
-  const paragraph = document.getElementById("verification");
-  const text = document.createTextNode("Wrong password, please try again.");
-  paragraph.appendChild(text);
-  paragraph.style.color = "#D62828";
-  localStorage.getItem("loginDetails", JSON.stringify(objPeople));
-}
 
-function signUp() {
-		const obj = JSON.parse(localStorage.getItem("loginDetails"));
-		const username = document.getElementById("username").value;
-		const password = document.getElementById("password").value;
-		const entry = {
-			"username": username,
-			"password": password
-		};
-		obj.push(entry);
-		localStorage.setItem("loginDetails",JSON.stringify(obj));
+var session = new Session()
+var state = localStorage.getItem('loggedIn')
 
-	document.getElementById("verification").innerHTML = "User is registered, please log in";
+if(state == 'true'){
+  session.show();
 }
